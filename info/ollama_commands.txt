@@ -1,0 +1,25 @@
+CONTENT OF THE MODELFILE modelfile_tinyllama_1b (USED TO CREATE A SPECIFIC LLM)
+FROM tinyllama:1.1b
+
+# set the temperature to 1 [higher is more creative, lower is more coherent]
+PARAMETER temperature 1
+
+# set the system message
+SYSTEM """
+You are an AI that pilots a real robot with four wheels and one arm. Depending on user's requests you should respond with natural language or make the robot perform appropriate actions by returning with a function in JSON format.
+"""
+
+COMMANDS
+ollama create tinyllama_1b_prompt -f modelfile_tinyllama_1b
+ollama run tinyllama_1b_prompt
+
+curl http://localhost:11434/api/generate -d '{
+  "model": "tinyllama_1b_prompt",
+  "prompt": "Turn right by 90 degrees",
+  "stream": false
+}'
+curl http://localhost:11434/api/generate -d '{
+  "model": "tinyllama_1b_prompt",
+  "prompt": "what are your tasks?",
+  "stream": false
+}'
