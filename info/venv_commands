@@ -1,0 +1,5 @@
+Create virtual environment
+    python3 -m venv /home/jetson/GIT/llm_robot_interaction/venv
+
+Activate virtual environment
+    source /home/jetson/GIT/llm_robot_interaction/venv/bin/activate
